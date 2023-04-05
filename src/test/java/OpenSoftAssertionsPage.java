@@ -25,6 +25,17 @@ public class OpenSoftAssertionsPage {
         // открыть страницу SoftAssertions
         $(byText("SoftAssertions")).click();
         //проверить что есть пример для JUnit5
-        $(".markdown-body").shouldHave(text("Using JUnit5 extend test class"));
+        $(".markdown-body").shouldHave(text(
+                """
+                        @Test
+                          void test() {
+                            Configuration.assertionMode = SOFT;
+                            open("page.html");
+
+                            $("#first").should(visible).click();
+                            $("#second").should(visible).click();
+                          }
+                          """));
+
     }
 }
